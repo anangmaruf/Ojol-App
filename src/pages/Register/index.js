@@ -3,25 +3,26 @@ import {ScrollView, Text, View} from 'react-native';
 import {Button, Input} from '../../components';
 import {colors} from '../../utils';
 import {IconBack, LogoHalsis} from '../../assets';
-import {useSelector} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 
 const Register = () => {
-  const globalState = useSelector(state => state);
-  const [form, setForm] = useState({
-    fullName: '',
-    email: '',
-    password: '',
-  });
+  const RegisterReducer = useSelector(state => state.RegisterReducer);
+  const dispatch = useDispatch;
+  // const [form, setForm] = useState({
+  //   fullName: '',
+  //   email: '',
+  //   password: '',
+  // });
 
   const sendData = () => {
-    console.log('data yang dikirim: ', form);
+    console.log('data yang dikirim: ', RegisterReducer.form);
   };
 
   const onInputChange = (value, input) => {
-    setForm({
-      ...form,
-      [input]: value,
-    });
+    // setForm({
+    //   ...form,
+    //   [input]: value,
+    // });
   };
   return (
     <View style={styles.wrapper.page}>
@@ -34,19 +35,19 @@ const Register = () => {
         <View style={styles.space(64)} />
         <Input
           placeholder="Nama Lengkap"
-          value={form.fullname}
+          value={RegisterReducer.form.fullname}
           onChangeText={value => onInputChange(value, 'fullName')}
         />
         <View style={styles.space(33)} />
         <Input
           placeholder="Email"
-          value={form.email}
+          value={RegisterReducer.form.email}
           onChangeText={value => onInputChange(value, 'email')}
         />
         <View style={styles.space(33)} />
         <Input
           placeholder="Password"
-          value={form.password}
+          value={RegisterReducer.form.password}
           onChangeText={value => onInputChange(value, 'password')}
           secureTextEntry={true}
         />
